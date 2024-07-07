@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import TextInput from '@/components/Common/Input/TextInput';
+import TextInput from './TextInput';
 
 const meta = {
-  title: 'Example/TextInput',
+  title: 'Shared/ui/TextInput',
   component: TextInput,
   parameters: {
     layout: 'centered',
