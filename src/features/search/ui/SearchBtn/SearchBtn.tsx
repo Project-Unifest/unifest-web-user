@@ -4,7 +4,7 @@ import { Button } from '@/shared/ui/Button/button';
 
 const SearchBtn: React.FC = () => {
   return (
-    <Button variant='outline' size='icon'>
+    <Button variant='ghost' size='icon'>
       <SearchIcon />
     </Button>
   );
