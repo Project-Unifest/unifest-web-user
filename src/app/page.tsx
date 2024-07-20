@@ -1,3 +1,4 @@
+'use client';
 import AlertDialogExample from '@/shared/ui/AlertDialog/AlertDialogExample';
 import Image from 'next/image';
 
