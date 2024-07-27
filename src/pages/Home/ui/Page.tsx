@@ -3,10 +3,10 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
+  AccordionOuter,
   AccordionTrigger,
 } from '@/shared/ui/Accordion/accordion';
 import { Calendar } from '@/shared/ui/Calendar/calendar';
-import PaginationExample from '@/shared/ui/Pagination/PaginationExample';
 import React from 'react';
 
 const HomePage: React.FC = () => {
@@ -14,8 +14,11 @@ const HomePage: React.FC = () => {
     <div>
       <Accordion type='single' collapsible>
         <AccordionItem value='item-1'>
+          <AccordionOuter>
+            <Calendar showOnlyWeek={true} />
+          </AccordionOuter>
           <AccordionContent>
-            <Calendar />
+            <Calendar showOnlyWeek={false} />
           </AccordionContent>
           <AccordionTrigger></AccordionTrigger>
         </AccordionItem>

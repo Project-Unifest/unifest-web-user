@@ -28,17 +28,30 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        'flex flex-1 items-center justify-center py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180',
+        'flex flex-1 flex-col items-center justify-center py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180',
         className
       )}
       {...props}
     >
-      {children}
+      <div className='[&[data-state=open]>svg]:rotate-180'>{children}</div>
       <LongChevronDown className='shrink-0 transition-transform duration-200' />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+
+const AccordionOuter = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.AccordionHeader
+    ref={ref}
+    className='overflow-hidden text-sm data-[state=closed]:flex data-[state=open]:hidden w-full justify-center'
+    {...props}
+  >
+    <div className={cn('pb-4 pt-0', className)}>{children}</div>
+  </AccordionPrimitive.AccordionHeader>
+));
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
@@ -46,7 +59,7 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className='overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
+    className='overflow-hidden text-sm transition-all flex data-[state=closed]:hidden data-[state=open]:animate-accordion-down w-full justify-center'
     {...props}
   >
     <div className={cn('pb-4 pt-0', className)}>{children}</div>
@@ -55,4 +68,10 @@ const AccordionContent = React.forwardRef<
 
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  AccordionOuter,
+};
