@@ -26,7 +26,10 @@ const NavigationBar: React.FC = () => {
     <Pagination className=' fixed bottom-0 left-0'>
       <PaginationContent className='w-full'>
         {menuData.map((dt) => (
-          <PaginationItem className='w-1/4 flex flex-row justify-center '>
+          <PaginationItem
+            className='w-1/4 flex flex-row justify-center '
+            key={dt.id}
+          >
             <PaginationLink
               href={dt.path}
               isActive={pathName === dt.path}
