@@ -14,8 +14,10 @@ export default function RootLayout({
   const pathName = usePathname();
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
-      {pathName !== '/intro' && <NavigationBar />}
+      <body className={inter.className}>
+        {children}
+        {pathName !== '/intro' && <NavigationBar />}
+      </body>
     </html>
   );
 }
