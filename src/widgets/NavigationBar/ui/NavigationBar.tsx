@@ -23,7 +23,7 @@ const NavigationBar: React.FC = () => {
   const pathName = usePathname();
 
   return (
-    <Pagination className=' fixed bottom-0 left-0'>
+    <Pagination className=' fixed bottom-0 left-0 bg-white'>
       <PaginationContent className='w-full'>
         {menuData.map((dt) => (
           <PaginationItem

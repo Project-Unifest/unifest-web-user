@@ -34,7 +34,7 @@ const festivalArr: Schedule[] = [
 ];
 const UpcomingFestivalSchdule: React.FC<Props> = ({}) => {
   return (
-    <section className='w-full'>
+    <section className='w-full pb-[60px]'>
       <h1 className=' font-semibold text-[15px] px-[19px] pt-[18px] pb-[25px]'>
         다가오는 축제 일정
       </h1>
