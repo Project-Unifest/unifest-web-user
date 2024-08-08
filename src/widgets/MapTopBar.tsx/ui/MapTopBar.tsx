@@ -12,7 +12,7 @@ const toggleArr = ['주점', '먹거리', '이벤트', '일반', '의무실', '�
 
 const MapTopBar: React.FC<Props> = ({}: Props) => {
   return (
-    <header className='flex flex-col gap-[10px] pl-[22px] pt-[25px] pb-[14px] items-start shadow-bottom rounded-b-[23px]'>
+    <header className='flex flex-col gap-[10px] pl-[22px] pt-[25px] pb-[14px] items-start shadow-bottom rounded-b-[23px] w-full'>
       <FestivalMapDrawer />
       <SearchBar />
       <ToggleGroup type='multiple'>

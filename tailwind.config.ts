@@ -74,6 +74,7 @@ const config = {
       },
       boxShadow: {
         bottom: '0px 4px 18.5px rgba(0, 0, 0, 0.12)',
+        top: '0px 0px 4px rgba(0, 0, 0, 0.12)',
       },
     },
   },
