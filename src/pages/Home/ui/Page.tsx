@@ -1,4 +1,3 @@
-import AccoridonExample from '@/shared/ui/Accordion/AccoridonExample';
 import {
   Accordion,
   AccordionContent,
@@ -8,7 +7,7 @@ import {
 } from '@/shared/ui/Accordion/accordion';
 import { Calendar } from '@/shared/ui/Calendar/calendar';
 import TodayFestivalSchedule from '@/widgets/TodayFesitivalSchedule/ui/TodayFestivalSchedule';
-import UpcomingFestivalSchdule from '@/widgets/UpcomingFestivalSchdule/ui/UpcomingFestivalSchdule';
+// import UpcomingFestivalSchdule from '@/widgets/UpcomingFestivalSchdule/ui/UpcomingFestivalSchdule';
 import React from 'react';
 
 const HomePage: React.FC = () => {
@@ -26,7 +25,6 @@ const HomePage: React.FC = () => {
         </AccordionItem>
       </Accordion>
       <TodayFestivalSchedule />
-      <UpcomingFestivalSchdule />
     </div>
   );
 };
