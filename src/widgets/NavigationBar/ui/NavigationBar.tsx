@@ -12,6 +12,9 @@ import HomeIcon from '@/shared/assets/icon/home_icon.svg';
 import MapIcon from '@/shared/assets/icon/map_icon.svg';
 import WaitingIcon from '@/shared/assets/icon/waiting_icon.svg';
 import MenuIcon from '@/shared/assets/icon/menu_icon.svg';
+import OnlyAppDialog from '@/widgets/OnlyAppDialog/ui/OnlyAppDialog';
+import { Button, buttonVariants } from '@/shared/ui/Button/button';
+import { cn } from '@/lib/utils';
 
 const menuData = [
   { id: 'menu01', name: '홈', path: '/home', icon: HomeIcon },
@@ -23,25 +26,38 @@ const NavigationBar: React.FC = () => {
   const pathName = usePathname();
 
   return (
-    <Pagination className=' fixed bottom-0 left-0 bg-white z-40'>
+    <Pagination className=' fixed bottom-0 left-0 bg-white z-40 shadow-top'>
       <PaginationContent className='w-full'>
         {menuData.map((dt) => (
           <PaginationItem
             className='w-1/4 flex flex-row justify-center '
             key={dt.id}
           >
-            <PaginationLink
-              href={dt.path}
-              isActive={pathName === dt.path}
-              className='w-full h-[56px]'
-            >
-              <div className='flex flex-col items-center gap-1'>
-                <dt.icon />
-                <p className=' text-[11px] text-[#525252] font-normal'>
-                  {dt.name}
-                </p>
-              </div>
-            </PaginationLink>
+            {dt.name === '웨이팅' ? (
+              <OnlyAppDialog>
+                <Button size={'full_full'} variant={'ghost'}>
+                  <div className='flex flex-col items-center gap-1'>
+                    <dt.icon />
+                    <p className=' text-[11px] text-[#525252] font-normal'>
+                      {dt.name}
+                    </p>
+                  </div>
+                </Button>
+              </OnlyAppDialog>
+            ) : (
+              <PaginationLink
+                href={dt.path}
+                isActive={pathName === dt.path}
+                className='w-full h-[56px]'
+              >
+                <div className='flex flex-col items-center gap-1'>
+                  <dt.icon />
+                  <p className=' text-[11px] text-[#525252] font-normal'>
+                    {dt.name}
+                  </p>
+                </div>
+              </PaginationLink>
+            )}
           </PaginationItem>
         ))}
       </PaginationContent>

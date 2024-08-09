@@ -1,7 +1,8 @@
+import MenuPage from '@/pages/Menu/ui/Page';
 import React from 'react';
 
 const MenuPageWrapper: React.FC = () => {
-  return <>MenuPageWrapper</>;
+  return <MenuPage />;
 };
 
 export default MenuPageWrapper;
