@@ -43,11 +43,14 @@ function Calendar({
       firstDayOfMonth.getDate() - firstDayOfMonth.getDay()
     );
     const endCalendarDay = new Date(lastDayOfMonth);
-    endCalendarDay.setDate(lastDayOfMonth.getDate() - lastDayOfMonth.getDay());
+    endCalendarDay.setDate(
+      lastDayOfMonth.getDate() + (6 - lastDayOfMonth.getDay())
+    );
 
     const remainingDates: Date[] = [];
     startOfWeek.setHours(0);
     endOfWeek.setHours(4);
+
     for (
       let day = new Date(firstCalendarDay);
       day <= endCalendarDay;
