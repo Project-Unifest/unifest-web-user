@@ -26,7 +26,7 @@ const Map: React.FC<Props> = ({}) => {
 
   return (
     <>
-      <div ref={mapWrapperRef} className='w-full h-[700px]'>
+      <div ref={mapWrapperRef} className='w-full h-[calc(100vh-216.5px)]'>
         <div ref={mapContainerRef} className='w-full h-full'></div>
       </div>
     </>

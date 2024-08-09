@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import LocationIcon from '@/shared/assets/icon/map_icon.svg';
+import LocationIcon from '@/shared/assets/icon/green_map_icon.svg';
 import TimeIcon from '@/shared/assets/icon/time_icon.svg';
 import ChevronDownIcon from '@/shared/assets/icon/chevron_down.svg';
 
@@ -45,14 +45,14 @@ const BoothDescription: React.FC<Props> = ({}: Props) => {
                   있으니 많은 관심 부탁드려요~!
                 </p>
                 <div className='flex items-center gap-[3px] pb-[11px]'>
-                  <LocationIcon />
+                  <TimeIcon />
                   <p className='font-medium text-[13px] text-[#393939]'>
                     운영중
                   </p>
                   <ChevronDownIcon />
                 </div>
                 <div className='flex items-center gap-[3px] pb-[16px]'>
-                  <TimeIcon />
+                  <LocationIcon />
                   <p className='font-medium text-[13px] text-[#393939]'>
                     청심대 앞
                   </p>
