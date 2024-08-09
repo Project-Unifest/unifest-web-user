@@ -5,7 +5,7 @@ interface Props {
 }
 const SchoolFestivalList: React.FC<Props> = ({ schoolArr }) => {
   return (
-    <ul className='w-[556px] flex flex-row gap-[7px] flex-wrap'>
+    <ul className='w-full flex flex-row gap-[7px] flex-wrap'>
       {schoolArr.map((dt) => (
         <SchoolCard
           imgSrc='https://i.namu.wiki/i/E4gAwg65fMroWtXG5POYiwcGseYpmfhrm9fYxCzSqXThXDMEG9yZAjkkq8_bQEkrIjAQZrQSObatdE-eDp86xQ.svg'

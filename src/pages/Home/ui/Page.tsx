@@ -13,7 +13,7 @@ import React from 'react';
 const HomePage: React.FC = () => {
   return (
     <div>
-      <Accordion type='single' collapsible>
+      <Accordion type='single' collapsible defaultValue='item-1'>
         <AccordionItem value='item-1'>
           <AccordionOuter>
             <Calendar showOnlyWeek={true} />

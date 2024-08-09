@@ -77,7 +77,7 @@ function Calendar({
       locale={ko}
       disabled={remainingDates}
       formatters={{
-        formatCaption: (date, options) => format(date, 'LLLL', options),
+        formatCaption: (date, options) => format(date, 'yyyy년 LLLL', options),
       }}
       classNames={{
         months:

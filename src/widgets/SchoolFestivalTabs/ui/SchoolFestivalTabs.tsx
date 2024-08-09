@@ -20,15 +20,15 @@ const regionArr = [
 
 const SchoolFestivalTabs: React.FC = () => {
   return (
-    <div className='w-full flex justify-center mt-[23px]'>
-      <Tabs defaultValue={regionArr[0]} className=''>
-        <TabsList>
+    <div className='w-full flex justify-start mt-[23px]'>
+      <Tabs defaultValue={regionArr[0]} className='w-full'>
+        <TabsList className='overflow-scroll whitespace-nowrap scrollbar-hide'>
           {regionArr.map((dt) => (
             <TabsTrigger value={dt}>{dt}</TabsTrigger>
           ))}
         </TabsList>
         {regionArr.map((dt) => (
-          <TabsContent value={dt}>
+          <TabsContent value={dt} className='px-[19px]'>
             <SchoolFestivalSearchList
               schoolArr={['asf', 'asfa', 'fas', 'asf', 'fasf', 'asf']}
             />
