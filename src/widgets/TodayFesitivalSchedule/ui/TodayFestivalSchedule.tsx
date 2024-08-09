@@ -1,7 +1,9 @@
+'use client';
 import TodayScheduleCard from '@/entities/festival/ui/TodayScheduleCard/TodayScheduleCard';
 import React from 'react';
 import ScheduleIcon from '@/shared/assets/icon/schedule.svg';
 import { Button } from '@/shared/ui/Button/button';
+import { useRouter } from 'next/navigation';
 
 interface Props {}
 interface Schedule {
@@ -37,6 +39,7 @@ const festivalArr: Schedule[] = [
   },
 ];
 const TodayFestivalSchedule: React.FC<Props> = ({}) => {
+  const router = useRouter();
   return (
     <section className='w-full border-b-[8px] border-b-[#F1F3F7]'>
       <h1 className=' font-semibold text-[15px] px-[19px] pt-[18px] pb-[25px]'>
@@ -63,7 +66,13 @@ const TodayFestivalSchedule: React.FC<Props> = ({}) => {
         </div>
       )}
       <div className='w-full px-[20px] pb-[22px]'>
-        <Button variant={'outlineGray'} size={'full_lg'}>
+        <Button
+          variant={'outlineGray'}
+          size={'full_lg'}
+          onClick={() => {
+            router.push('/intro');
+          }}
+        >
           관심 축제 추가하기
         </Button>
       </div>

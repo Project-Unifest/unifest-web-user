@@ -1,9 +1,11 @@
+'use client';
 import OnlyAppDialog from '@/widgets/OnlyAppDialog/ui/OnlyAppDialog';
 import React from 'react';
 import SettingIcon from '@/shared/assets/icon/setting_icon.svg';
 import CallIcon from '@/shared/assets/icon/call_icon.svg';
 import EtcIcon from '@/shared/assets/icon/etc_icon.svg';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 interface Props {}
 
 const schoolArr: {
@@ -12,6 +14,7 @@ const schoolArr: {
   festivalName: string;
 }[] = [{ imgSrc: '', schoolName: '건국대', festivalName: '녹색지대' }];
 const MenuPage: React.FC<Props> = ({}) => {
+  const router = useRouter();
   return (
     <>
       <header className='fixed top-0 left-0 w-full px-[19px] py-[18px] rounded-b-2xl shadow-bottom bg-white'>
@@ -23,7 +26,10 @@ const MenuPage: React.FC<Props> = ({}) => {
             <h1 className='font-bold text-[15px] text-[#131316] '>
               나의 관심학교
             </h1>
-            <button className='underline font-semibold text-[11px] text-[#727276]'>
+            <button
+              className='underline font-semibold text-[11px] text-[#727276]'
+              onClick={() => router.push('/intro')}
+            >
               추가하기{'>'}
             </button>
           </div>
