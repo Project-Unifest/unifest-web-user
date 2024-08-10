@@ -60,6 +60,24 @@ const SchoolFestivalTabs: React.FC = () => {
     queryFn: () => getFestivalByRegion(nowTab),
   });
 
+  const dateToDateFormat = (beginDate: string, endDate: string) => {
+    const begin = new Date(beginDate);
+    const end = new Date(endDate);
+    const beginMonth = begin.getMonth() + 1;
+    const beginDay = begin.getDate();
+    const endMonth = end.getMonth() + 1;
+    const endDay = end.getDate();
+    const beginText =
+      (beginMonth < 10 ? `0${beginMonth}` : `${beginMonth}`) +
+      '.' +
+      (beginDay < 10 ? `0${beginDay}` : `${beginDay}`);
+    const endText =
+      (endMonth < 10 ? `0${endMonth}` : `${endMonth}`) +
+      '.' +
+      (endDay < 10 ? `0${endDay}` : `${endDay}`);
+    return beginText + '~' + endText;
+  };
+
   const dataToShow: {
     imgSrc: string;
     schoolName: string;
@@ -71,13 +89,13 @@ const SchoolFestivalTabs: React.FC = () => {
           imgSrc: dt.thumbnail,
           schoolName: dt.schoolName,
           festivalName: dt.festivalName,
-          date: dt.beginDate,
+          date: dateToDateFormat(dt.beginDate, dt.endDate),
         }))
       : regionData?.data.map((dt) => ({
           imgSrc: dt.thumbnail,
           schoolName: dt.schoolName,
           festivalName: dt.festivalName,
-          date: dt.beginDate,
+          date: dateToDateFormat(dt.beginDate, dt.endDate),
         }))) || [];
 
   return (
