@@ -1,7 +1,12 @@
 import SchoolFestivalList from '@/widgets/SchoolFestivalList/ui/SchoolFestivalList';
 import React from 'react';
 interface Props {
-  schoolArr: string[];
+  schoolArr: {
+    imgSrc: string;
+    schoolName: string;
+    festivalName: string;
+    date: string;
+  }[];
 }
 const SchoolFestivalInterestList: React.FC<Props> = ({ schoolArr }) => {
   return (

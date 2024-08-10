@@ -1,7 +1,12 @@
 import SchoolFestivalList from '@/widgets/SchoolFestivalList/ui/SchoolFestivalList';
 import React from 'react';
 interface Props {
-  schoolArr: string[];
+  schoolArr: {
+    imgSrc: string;
+    schoolName: string;
+    festivalName: string;
+    date: string;
+  }[];
 }
 const SchoolFestivalSearchList: React.FC<Props> = ({ schoolArr }) => {
   return (
@@ -10,8 +15,8 @@ const SchoolFestivalSearchList: React.FC<Props> = ({ schoolArr }) => {
         총 {schoolArr.length}개
       </p>
       {schoolArr.length === 0 ? (
-        <div>
-          <p className='font-[#7E7E7E] font-normal text-xs'>
+        <div className='py-[191px] w-full flex justify-center'>
+          <p className='font-[#727276] font-normal text-[14px]'>
             검색 결과가 없어요
           </p>
         </div>

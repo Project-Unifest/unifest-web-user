@@ -15,11 +15,13 @@ const SchoolCard: React.FC<Props> = ({
   return (
     <li className='flex cursor-pointer flex-col items-center gap-[2px] justify-center w-[113px] h-[121px] rounded-[10px] border-[1px] border-[#D9D9D9]'>
       <Image src={imgSrc} alt='schoolCard img' width={35} height={34} />
-      <h1 className=' text-black font-medium mt-[6px] text-[13px]'>
+      <h1 className=' text-[#131316] font-medium mt-[6px] text-[13px]'>
         {schoolName}
       </h1>
-      <h2 className='text-black font-bold text-xs'>{festivalName}</h2>
-      <p className='text-[#979797] font-medium text-xs'>{date}</p>
+      <h2 className='text-[#[#131316]] font-bold text-[12px]'>
+        {festivalName}
+      </h2>
+      <p className='text-[#979797] font-medium text-[12px]'>{date}</p>
     </li>
   );
 };
