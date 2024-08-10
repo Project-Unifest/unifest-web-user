@@ -1,5 +1,5 @@
+'use client';
 import { useEffect, useState } from 'react';
-import locationImg from '@/shared/assets/icon/location.svg';
 
 type Location = {
   lat: number; // 위도
@@ -17,16 +17,17 @@ export const useUserLocationMap = (
 
   useEffect(() => {
     if (userLocation && map) {
-      if (isSetCenter)
+      if (isSetCenter) {
         map.setCenter(
           new naver.maps.LatLng(userLocation.lat, userLocation.lng)
         );
+      }
       if (!userLocMarker) {
         setUserLocMarker(
           new naver.maps.Marker({
             position: new naver.maps.LatLng(userLocation.lat, userLocation.lng),
             map: map,
-            icon: locationImg,
+            icon: 'location.svg',
           })
         );
       }

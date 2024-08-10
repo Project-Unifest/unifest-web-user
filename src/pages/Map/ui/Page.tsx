@@ -8,6 +8,7 @@ import NowLocationIcon from '@/shared/assets/icon/now_location.svg';
 import XIcon from '@/shared/assets/icon/x.svg';
 import Image from 'next/image';
 import LocationIcon from '@/shared/assets/icon/green_map_icon.svg';
+import { useRouter } from 'next/navigation';
 interface Props {}
 
 const boothArr: {
@@ -41,6 +42,7 @@ const boothArr: {
 
 const MapPage: React.FC<Props> = ({}) => {
   const [isPopularBooth, setIsPopularBooth] = useState<boolean>(false);
+  const router = useRouter();
   return (
     <div className='flex flex-col w-full relative'>
       <MapTopBar />
@@ -70,7 +72,10 @@ const MapPage: React.FC<Props> = ({}) => {
         {isPopularBooth && (
           <ul className='w-full px-[44px] flex items-center gap-[12px] overflow-scroll whitespace-nowrap scrollbar-hide'>
             {boothArr.map((dt, idx) => (
-              <li className='w-[80vw] rounded-xl bg-white flex flex-row gap-[15px] px-[16px] py-[15px]'>
+              <li
+                className='w-[80vw] rounded-xl bg-white flex flex-row gap-[15px] px-[16px] py-[15px]'
+                onClick={() => router.push('/booth')}
+              >
                 <div className='relative'>
                   <Image
                     src={dt.imgSrc}

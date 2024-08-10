@@ -19,7 +19,7 @@ const Map: React.FC<Props> = ({}) => {
     false,
     mapContainerRef
   );
-  //   useUserLocationMap(map, userLocation);
+  useUserLocationMap(map, userLocation, true);
 
   //   if (scriptError || geocoderScriptError) return <p>Map Error!</p>;
   //   if (scriptLoading || geoCoderScriptLoading) return <div>map loading..</div>;
