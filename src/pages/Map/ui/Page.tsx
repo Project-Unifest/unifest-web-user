@@ -4,7 +4,6 @@ import { Button } from '@/shared/ui/Button/button';
 import MapTopBar from '@/widgets/MapTopBar.tsx/ui/MapTopBar';
 import React, { useState } from 'react';
 import ChevronUpIcon from '@/shared/assets/icon/pink_chevron_up.svg';
-import NowLocationIcon from '@/shared/assets/icon/now_location.svg';
 import XIcon from '@/shared/assets/icon/x.svg';
 import Image from 'next/image';
 import LocationIcon from '@/shared/assets/icon/green_map_icon.svg';
@@ -46,8 +45,8 @@ const MapPage: React.FC<Props> = ({}) => {
   return (
     <div className='flex flex-col w-full relative'>
       <MapTopBar />
-      <Map />
-      <div className='absolute bottom bottom-[20px] w-full flex flex-col gap-[18px]'>
+      <Map isPopularBooth={isPopularBooth} />
+      <div className='absolute bottom bottom-[20px] w-full flex flex-col gap-[18px] z-10'>
         <div className='flex justify-center gap-[5px] w-full'>
           {isPopularBooth && (
             <Button
@@ -105,21 +104,6 @@ const MapPage: React.FC<Props> = ({}) => {
           </ul>
         )}
       </div>
-      {!isPopularBooth && (
-        <div className='absolute bottom bottom-[20px] flex flex-col items-center right-[20px] gap-[6px]'>
-          <div className='w-[42px] h-[81px] px-[7.5px] rounded-full flex flex-col justify-center items-center bg-white'>
-            <button className='w-full h-[40px] border-b border-b-[#BABABF] text-[35px] font-semibold text-[#131316] flex justify-center items-center cursor-pointer '>
-              +
-            </button>
-            <button className='w-full h-[40px] text-[35px] font-semibold text-[#131316] text-center flex justify-center items-center cursor-pointer'>
-              -
-            </button>
-          </div>
-          <button className='w-[42px] h-[42px] flex rounded-full justify-center items-center bg-white'>
-            <NowLocationIcon />
-          </button>
-        </div>
-      )}
     </div>
   );
 };
