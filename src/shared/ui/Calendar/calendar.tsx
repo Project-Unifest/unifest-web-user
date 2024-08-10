@@ -14,15 +14,23 @@ export type CustomProps = {
   showOnlyWeek?: boolean;
 };
 
+type Props = {
+  selectedDate: Date | undefined;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+};
+
 function Calendar({
   className,
   classNames,
   showOutsideDays = true,
   showOnlyWeek = true,
+  selectedDate,
+  setSelectedDate,
   ...props
-}: CalendarProps & CustomProps) {
-  const getRemainingDatesInMonthExcludingCurrentWeek = (): Date[] => {
-    const today = new Date();
+}: CalendarProps & CustomProps & Props) {
+  const getRemainingDatesInMonthExcludingCurrentWeek = (
+    today: Date
+  ): Date[] => {
     const year = today.getFullYear();
     const month = today.getMonth();
 
@@ -66,7 +74,9 @@ function Calendar({
   };
 
   const remainingDates = showOnlyWeek
-    ? getRemainingDatesInMonthExcludingCurrentWeek()
+    ? getRemainingDatesInMonthExcludingCurrentWeek(
+        selectedDate ? selectedDate : new Date()
+      )
     : [];
 
   const daysWithOneFestival = [
@@ -84,16 +94,25 @@ function Calendar({
     new Date(2024, 7, 17),
     new Date(2024, 7, 18),
   ];
-  const [selectedDate, setSelectedDate] = React.useState<Date | undefined>();
 
   const modifiers: DayPickerProps['modifiers'] = {};
   if (selectedDate) {
     modifiers.selected = selectedDate;
   }
 
+  const [month, setMonth] = React.useState(new Date());
+
+  React.useEffect(() => {
+    if (selectedDate) {
+      setMonth(selectedDate);
+    }
+  }, [selectedDate]);
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
+      month={month}
+      onMonthChange={setMonth}
       modifiers={{
         one: daysWithOneFestival,
         two: daysWithTwoFestival,

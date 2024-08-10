@@ -1,3 +1,4 @@
+'use client';
 import {
   Accordion,
   AccordionContent,
@@ -8,15 +9,20 @@ import {
 import { Calendar } from '@/shared/ui/Calendar/calendar';
 import TodayFestivalSchedule from '@/widgets/TodayFesitivalSchedule/ui/TodayFestivalSchedule';
 // import UpcomingFestivalSchdule from '@/widgets/UpcomingFestivalSchdule/ui/UpcomingFestivalSchdule';
-import React from 'react';
+import React, { useState } from 'react';
 
 const HomePage: React.FC = () => {
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   return (
     <div>
       <Accordion type='single' collapsible defaultValue='item-1'>
         <AccordionItem value='item-1'>
           <AccordionOuter className='px-[19px] py-[27px]'>
-            <Calendar showOnlyWeek={true} />
+            <Calendar
+              showOnlyWeek={true}
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+            />
           </AccordionOuter>
           <AccordionContent className='px-[19px] py-[27px]'>
             <div className='w-full relative'>
@@ -31,7 +37,11 @@ const HomePage: React.FC = () => {
                   3개 이상
                 </div>
               </div>
-              <Calendar showOnlyWeek={false} />
+              <Calendar
+                showOnlyWeek={false}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+              />
             </div>
           </AccordionContent>
           <AccordionTrigger></AccordionTrigger>
