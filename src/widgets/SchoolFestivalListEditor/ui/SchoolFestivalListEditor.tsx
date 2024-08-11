@@ -9,6 +9,9 @@ interface Props {
   >;
   changeMapToLocation: (lat: number, lng: number) => void;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCheckedInterestFestival: React.Dispatch<
+    React.SetStateAction<interestFestival | undefined>
+  >;
 }
 const SchoolFestivalListEditor: React.FC<Props> = ({
   interestSchoolList,
@@ -16,6 +19,7 @@ const SchoolFestivalListEditor: React.FC<Props> = ({
   setInterestSchoolList,
   changeMapToLocation,
   setIsOpen,
+  setCheckedInterestFestival,
 }) => {
   return (
     <ul className='w-full flex flex-row gap-[7px] flex-wrap'>
@@ -28,6 +32,7 @@ const SchoolFestivalListEditor: React.FC<Props> = ({
           isEditMode={isEditMode}
           onClickCard={() => {
             changeMapToLocation(dt.lat, dt.lng);
+            setCheckedInterestFestival(dt);
             setIsOpen(false);
           }}
           onDeleteCard={() => {

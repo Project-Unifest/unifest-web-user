@@ -83,12 +83,19 @@ const FestivalMapDrawer: React.FC<Props> = ({ changeMapToLocation }: Props) => {
       lng: dt.longitude,
     })) || [];
 
+  const [checkedInterestFestival, setCheckedInterestFestival] =
+    useState<interestFestival>();
+
   return (
     <div>
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
         <DrawerTrigger>
           <div className='flex flex-row items-center gap-[6px]'>
-            <p className='font-semibold text-[20px]'>건국대학교</p>
+            <p className='font-semibold text-[20px]'>
+              {checkedInterestFestival
+                ? checkedInterestFestival.schoolName
+                : '학교를 선택해주세요'}
+            </p>
             <ChevronDownIcon />
           </div>
         </DrawerTrigger>
@@ -220,6 +227,7 @@ const FestivalMapDrawer: React.FC<Props> = ({ changeMapToLocation }: Props) => {
                   setInterestSchoolList={setInterestSchoolList}
                   changeMapToLocation={changeMapToLocation}
                   setIsOpen={setIsOpen}
+                  setCheckedInterestFestival={setCheckedInterestFestival}
                 />
               )}
             </div>

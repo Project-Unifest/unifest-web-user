@@ -9,12 +9,16 @@ interface Props {
   >;
   changeMapToLocation: (lat: number, lng: number) => void;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCheckedInterestFestival: React.Dispatch<
+    React.SetStateAction<interestFestival | undefined>
+  >;
 }
 const SchoolFestivalInterestListEditor: React.FC<Props> = ({
   interestSchoolList,
   setInterestSchoolList,
   changeMapToLocation,
   setIsOpen,
+  setCheckedInterestFestival,
 }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   return (
@@ -38,6 +42,7 @@ const SchoolFestivalInterestListEditor: React.FC<Props> = ({
         setInterestSchoolList={setInterestSchoolList}
         changeMapToLocation={changeMapToLocation}
         setIsOpen={setIsOpen}
+        setCheckedInterestFestival={setCheckedInterestFestival}
       />
       {isEditMode && (
         <div className='fixed bottom-[22px] w-full left-0 px-[15px]'>
