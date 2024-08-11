@@ -1,18 +1,8 @@
 import SchoolCard from '@/entities/school/ui/SchoolCard/SchoolCard';
-import {
-  interestFestival,
-  interestFestivalArrData,
-} from '@/shared/store/types/festival';
+import { interestFestival } from '@/shared/store/types/festival';
 import React from 'react';
 interface Props {
-  schoolArr: {
-    imgSrc: string;
-    schoolName: string;
-    festivalName: string;
-    date: string;
-    festivalId: string;
-    schoolId: string;
-  }[];
+  schoolArr: interestFestival[];
   interestSchoolList: interestFestival[];
   setInterestSchoolList?: React.Dispatch<
     React.SetStateAction<interestFestival[]>

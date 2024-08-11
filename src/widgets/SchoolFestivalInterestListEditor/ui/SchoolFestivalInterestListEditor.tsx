@@ -1,10 +1,21 @@
+import { interestFestival } from '@/shared/store/types/festival';
 import { Button } from '@/shared/ui/Button/button';
 import SchoolFestivalListEditor from '@/widgets/SchoolFestivalListEditor/ui/SchoolFestivalListEditor';
 import React, { useState } from 'react';
 interface Props {
-  schoolArr: string[];
+  interestSchoolList: interestFestival[];
+  setInterestSchoolList: React.Dispatch<
+    React.SetStateAction<interestFestival[]>
+  >;
+  changeMapToLocation: (lat: number, lng: number) => void;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const SchoolFestivalInterestListEditor: React.FC<Props> = ({ schoolArr }) => {
+const SchoolFestivalInterestListEditor: React.FC<Props> = ({
+  interestSchoolList,
+  setInterestSchoolList,
+  changeMapToLocation,
+  setIsOpen,
+}) => {
   const [isEditMode, setIsEditMode] = useState(false);
   return (
     <div className=' w-full flex flex-col items-center px-[19px] pb-[21px] relative border-t-[8px] border-t-[#F1F3F7]'>
@@ -21,7 +32,13 @@ const SchoolFestivalInterestListEditor: React.FC<Props> = ({ schoolArr }) => {
           </button>
         )}
       </div>
-      <SchoolFestivalListEditor schoolArr={schoolArr} isEditMode={isEditMode} />
+      <SchoolFestivalListEditor
+        interestSchoolList={interestSchoolList}
+        isEditMode={isEditMode}
+        setInterestSchoolList={setInterestSchoolList}
+        changeMapToLocation={changeMapToLocation}
+        setIsOpen={setIsOpen}
+      />
       {isEditMode && (
         <div className='fixed bottom-[22px] w-full left-0 px-[15px]'>
           <Button size={'full_lg'} onClick={() => setIsEditMode(false)}>

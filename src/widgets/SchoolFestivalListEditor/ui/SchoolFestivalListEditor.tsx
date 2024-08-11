@@ -1,22 +1,60 @@
 import SchoolCardEditor from '@/entities/school/ui/SchoolCardEditor/SchoolCardEditor';
+import { interestFestival } from '@/shared/store/types/festival';
 import React from 'react';
 interface Props {
-  schoolArr: string[];
+  interestSchoolList: interestFestival[];
   isEditMode: boolean;
+  setInterestSchoolList: React.Dispatch<
+    React.SetStateAction<interestFestival[]>
+  >;
+  changeMapToLocation: (lat: number, lng: number) => void;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const SchoolFestivalListEditor: React.FC<Props> = ({
-  schoolArr,
+  interestSchoolList,
   isEditMode,
+  setInterestSchoolList,
+  changeMapToLocation,
+  setIsOpen,
 }) => {
   return (
     <ul className='w-full flex flex-row gap-[7px] flex-wrap'>
-      {schoolArr.map((dt) => (
+      {interestSchoolList.map((dt) => (
         <SchoolCardEditor
-          imgSrc='https://i.namu.wiki/i/E4gAwg65fMroWtXG5POYiwcGseYpmfhrm9fYxCzSqXThXDMEG9yZAjkkq8_bQEkrIjAQZrQSObatdE-eDp86xQ.svg'
-          schoolName='zxcv'
-          festivalName='fas'
-          date='qrw'
+          imgSrc={dt.imgSrc}
+          schoolName={dt.schoolName}
+          festivalName={dt.festivalName}
+          date={dt.date}
           isEditMode={isEditMode}
+          onClickCard={() => {
+            changeMapToLocation(dt.lat, dt.lng);
+            setIsOpen(false);
+          }}
+          onDeleteCard={() => {
+            const newData = {
+              data: [
+                ...interestSchoolList.filter(
+                  (x) =>
+                    !(
+                      x.festivalId === dt.festivalId &&
+                      x.schoolId === dt.schoolId
+                    )
+                ),
+              ],
+            };
+            localStorage.setItem(
+              'unifest-interest-festival',
+              JSON.stringify(newData)
+            );
+            setInterestSchoolList([
+              ...interestSchoolList.filter(
+                (x) =>
+                  !(
+                    x.festivalId === dt.festivalId && x.schoolId === dt.schoolId
+                  )
+              ),
+            ]);
+          }}
         />
       ))}
     </ul>

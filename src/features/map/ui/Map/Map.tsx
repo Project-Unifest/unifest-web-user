@@ -7,26 +7,21 @@ import NowLocationIcon from '@/shared/assets/icon/now_location.svg';
 
 interface Props {
   isPopularBooth: boolean;
+  mapContainerRef: React.RefObject<HTMLDivElement>;
+  mapWrapperRef: React.RefObject<HTMLDivElement>;
+  changeMapToCenter: () => void;
+  plusZoom: () => void;
+  minusZoom: () => void;
 }
 
-const Map: React.FC<Props> = ({ isPopularBooth }) => {
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapWrapperRef = useRef<HTMLDivElement>(null);
-  const { userLocation } = useLocation();
-
-  const { map } = useMapWithGeocoder(
-    undefined,
-    false,
-    undefined,
-    false,
-    mapContainerRef
-  );
-  const { changeMapToCenter, plusZoom, minusZoom } = useUserLocationMap(
-    map,
-    userLocation,
-    true
-  );
-
+const Map: React.FC<Props> = ({
+  isPopularBooth,
+  mapContainerRef,
+  mapWrapperRef,
+  changeMapToCenter,
+  plusZoom,
+  minusZoom,
+}) => {
   //   if (scriptError || geocoderScriptError) return <p>Map Error!</p>;
   //   if (scriptLoading || geoCoderScriptLoading) return <div>map loading..</div>;
 

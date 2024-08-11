@@ -2,12 +2,15 @@
 import Map from '@/features/map/ui/Map/Map';
 import { Button } from '@/shared/ui/Button/button';
 import MapTopBar from '@/widgets/MapTopBar.tsx/ui/MapTopBar';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ChevronUpIcon from '@/shared/assets/icon/pink_chevron_up.svg';
 import XIcon from '@/shared/assets/icon/x.svg';
 import Image from 'next/image';
 import LocationIcon from '@/shared/assets/icon/green_map_icon.svg';
 import { useRouter } from 'next/navigation';
+import { useLocation } from '@/features/map/hook/useLocation';
+import { useMapWithGeocoder } from '@/features/map/hook/useMapWithGeocoder';
+import { useUserLocationMap } from '@/features/map/hook/useUserLocationMap';
 interface Props {}
 
 const boothArr: {
@@ -42,10 +45,32 @@ const boothArr: {
 const MapPage: React.FC<Props> = ({}) => {
   const [isPopularBooth, setIsPopularBooth] = useState<boolean>(false);
   const router = useRouter();
+
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapWrapperRef = useRef<HTMLDivElement>(null);
+  const { userLocation } = useLocation();
+
+  const { map } = useMapWithGeocoder(
+    undefined,
+    false,
+    undefined,
+    false,
+    mapContainerRef
+  );
+  const { changeMapToCenter, plusZoom, minusZoom, changeMapToLocation } =
+    useUserLocationMap(map, userLocation, true);
+
   return (
     <div className='flex flex-col w-full relative'>
-      <MapTopBar />
-      <Map isPopularBooth={isPopularBooth} />
+      <MapTopBar changeMapToLocation={changeMapToLocation} />
+      <Map
+        isPopularBooth={isPopularBooth}
+        mapContainerRef={mapContainerRef}
+        mapWrapperRef={mapWrapperRef}
+        changeMapToCenter={changeMapToCenter}
+        plusZoom={plusZoom}
+        minusZoom={minusZoom}
+      />
       <div className='absolute bottom bottom-[20px] w-full flex flex-col gap-[18px] z-10'>
         <div className='flex justify-center gap-[5px] w-full'>
           {isPopularBooth && (

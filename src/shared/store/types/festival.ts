@@ -5,6 +5,8 @@ export interface interestFestival {
   date: string;
   festivalId: string;
   schoolId: string;
+  lat: number;
+  lng: number;
 }
 export interface interestFestivalArrData {
   data: interestFestival[];

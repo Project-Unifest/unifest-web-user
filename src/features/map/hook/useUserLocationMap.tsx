@@ -20,6 +20,11 @@ export const useUserLocationMap = (
       map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
     }
   };
+  const changeMapToLocation = (lat: number, lng: number) => {
+    if (userLocation && map) {
+      map.setCenter(new naver.maps.LatLng(lat, lng));
+    }
+  };
   const plusZoom = () => {
     if (map && map.getZoom() < map.getMaxZoom()) {
       map.setZoom(map.getZoom() + 1);
@@ -50,5 +55,11 @@ export const useUserLocationMap = (
     }
   }, [userLocation, map, userLocMarker, isSetCenter]);
 
-  return { userLocMarker, changeMapToCenter, plusZoom, minusZoom };
+  return {
+    userLocMarker,
+    changeMapToCenter,
+    plusZoom,
+    minusZoom,
+    changeMapToLocation,
+  };
 };

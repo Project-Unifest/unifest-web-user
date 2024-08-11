@@ -37,7 +37,7 @@ const IntroPage: React.FC = () => {
       <SearchBar />
       {interestSchoolList.length > 0 && (
         <SchoolFestivalInterestList
-          schoolArr={interestSchoolList}
+          interestSchoolList={interestSchoolList}
           clearInterestSchoolList={clearInterestSchoolList}
         />
       )}

@@ -74,14 +74,7 @@ const SchoolFestivalTabs: React.FC<Props> = ({
     return beginText + '~' + endText;
   };
 
-  const dataToShow: {
-    imgSrc: string;
-    schoolName: string;
-    festivalName: string;
-    date: string;
-    festivalId: string;
-    schoolId: string;
-  }[] =
+  const dataToShow: interestFestival[] =
     (nowTab === '전체'
       ? allData?.data.map((dt) => ({
           imgSrc: dt.thumbnail,
@@ -90,6 +83,8 @@ const SchoolFestivalTabs: React.FC<Props> = ({
           date: dateToDateFormat(dt.beginDate, dt.endDate),
           festivalId: dt.festivalId,
           schoolId: dt.schoolId,
+          lat: dt.latitude,
+          lng: dt.longitude,
         }))
       : regionData?.data.map((dt) => ({
           imgSrc: dt.thumbnail,
@@ -98,6 +93,8 @@ const SchoolFestivalTabs: React.FC<Props> = ({
           date: dateToDateFormat(dt.beginDate, dt.endDate),
           festivalId: dt.festivalId,
           schoolId: dt.schoolId,
+          lat: dt.latitude,
+          lng: dt.longitude,
         }))) || [];
 
   return (

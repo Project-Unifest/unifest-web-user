@@ -19,6 +19,8 @@ interface Props {
   festivalName: string;
   date: string;
   isEditMode: boolean;
+  onClickCard: () => void;
+  onDeleteCard: () => void;
 }
 const SchoolCardEditor: React.FC<Props> = ({
   imgSrc,
@@ -26,9 +28,18 @@ const SchoolCardEditor: React.FC<Props> = ({
   festivalName,
   date,
   isEditMode,
+  onClickCard,
+  onDeleteCard,
 }) => {
   return (
-    <li className='flex cursor-pointer relative flex-col items-center gap-[2px] justify-center w-[113px] h-[121px] rounded-[10px] border-[1px] border-[#D9D9D9]'>
+    <li
+      onClick={() => {
+        if (!isEditMode) {
+          onClickCard();
+        }
+      }}
+      className='flex cursor-pointer relative flex-col items-center gap-[2px] justify-center w-[113px] h-[121px] rounded-[10px] border-[1px] border-[#D9D9D9]'
+    >
       <Image src={imgSrc} alt='schoolCard img' width={35} height={34} />
       <h1 className=' text-black font-medium mt-[6px] text-[13px]'>
         {schoolName}
@@ -53,7 +64,7 @@ const SchoolCardEditor: React.FC<Props> = ({
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogAction>확인</AlertDialogAction>
+              <AlertDialogAction onClick={onDeleteCard}>확인</AlertDialogAction>
               <AlertDialogCancel>취소</AlertDialogCancel>
             </AlertDialogFooter>
           </AlertDialogContent>
