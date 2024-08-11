@@ -35,7 +35,7 @@ const TabsFullList = React.forwardRef<
     {...props}
   />
 ));
-TabsList.displayName = TabsPrimitive.List.displayName;
+TabsFullList.displayName = TabsPrimitive.List.displayName;
 
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
@@ -65,7 +65,7 @@ const TabsBlackTrigger = React.forwardRef<
     {...props}
   />
 ));
-TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
+TabsBlackTrigger.displayName = TabsPrimitive.Trigger.displayName;
 
 const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,

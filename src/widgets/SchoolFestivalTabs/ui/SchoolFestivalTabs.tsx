@@ -101,14 +101,18 @@ const SchoolFestivalTabs: React.FC<Props> = ({
     <div className='w-full flex justify-start mt-[23px]'>
       <Tabs value={nowTab} className='w-full'>
         <TabsList className='overflow-scroll whitespace-nowrap scrollbar-hide'>
-          {regionArr.map((dt) => (
-            <TabsTrigger value={dt} onClick={() => setNowTab(dt)}>
+          {regionArr.map((dt, idx) => (
+            <TabsTrigger
+              value={dt}
+              onClick={() => setNowTab(dt)}
+              key={dt + idx}
+            >
               {dt}
             </TabsTrigger>
           ))}
         </TabsList>
-        {regionArr.map((dt) => (
-          <TabsContent value={dt} className='px-[19px]'>
+        {regionArr.map((dt, idx) => (
+          <TabsContent value={dt} className='px-[19px]' key={dt + idx}>
             <SchoolFestivalSearchList
               schoolArr={dataToShow}
               interestSchoolList={interestSchoolList}

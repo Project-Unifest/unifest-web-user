@@ -15,8 +15,9 @@ const SchoolFestivalList: React.FC<Props> = ({
 }) => {
   return (
     <ul className='w-full flex flex-row gap-[7px] flex-wrap'>
-      {schoolArr.map((dt) => (
+      {schoolArr.map((dt, idx) => (
         <SchoolCard
+          key={dt.festivalId + idx}
           {...dt}
           onClick={() => {
             if (setInterestSchoolList) {

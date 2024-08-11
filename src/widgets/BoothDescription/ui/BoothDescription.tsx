@@ -73,7 +73,10 @@ const BoothDescription: React.FC<Props> = ({ boothDetailData }: Props) => {
                 <ul className='flex flex-col gap-[16px]'>
                   {boothDetailData && boothDetailData.menus.length > 0 ? (
                     boothDetailData.menus.map((dt, idx) => (
-                      <li className='flex flex-row gap-[13px] items-center'>
+                      <li
+                        className='flex flex-row gap-[13px] items-center'
+                        key={dt.id + idx}
+                      >
                         <Image
                           src={dt.imgUrl}
                           className='w-[86px] h-[86px] rounded-[12px]'
@@ -108,6 +111,7 @@ const BoothDescription: React.FC<Props> = ({ boothDetailData }: Props) => {
                   {imgArr.map((dtSrc, idx) => (
                     <Image
                       src={dtSrc}
+                      key={dtSrc + idx}
                       className='w-[113px] h-[113px]'
                       alt={`booth food image ${idx}`}
                     />
@@ -154,7 +158,10 @@ const BoothDescription: React.FC<Props> = ({ boothDetailData }: Props) => {
                 <ul className='flex flex-col gap-[16px]'>
                   {boothDetailData && boothDetailData.menus.length > 0 ? (
                     boothDetailData.menus.map((dt, idx) => (
-                      <li className='flex flex-row gap-[13px] items-center'>
+                      <li
+                        className='flex flex-row gap-[13px] items-center'
+                        key={dt.id + idx}
+                      >
                         <Image
                           src={dt.imgUrl}
                           className='w-[86px] h-[86px] rounded-[12px]'
@@ -189,6 +196,7 @@ const BoothDescription: React.FC<Props> = ({ boothDetailData }: Props) => {
                   {imgArr.map((dtSrc, idx) => (
                     <Image
                       src={dtSrc}
+                      key={dtSrc + idx}
                       className='w-[113px] h-[113px]'
                       alt={`booth food image ${idx}`}
                     />

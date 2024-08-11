@@ -138,6 +138,7 @@ const FestivalMapDrawer: React.FC<Props> = ({
                       <ul className='flex flex-col w-full'>
                         {searchDataArr.map((dt, idx) => (
                           <li
+                            key={dt.schoolId + idx}
                             className={`w-full px-[24px] flex flex-row py-[15px] items-center justify-between ${idx !== 0 && 'border-t border-t-[#E3E4EA]'}`}
                           >
                             <div className='flex flex-row items-center gap-[8px]'>

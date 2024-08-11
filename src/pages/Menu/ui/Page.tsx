@@ -36,7 +36,10 @@ const MenuPage: React.FC<Props> = ({}) => {
           {schoolArr.length > 0 ? (
             <ul className='w-full flex flex-row flex-wrap gap-[34px] items-center pt-[25px]'>
               {schoolArr.map((dt, idx) => (
-                <li className='flex flex-col gap-[15px]'>
+                <li
+                  className='flex flex-col gap-[15px]'
+                  key={dt.schoolName + idx}
+                >
                   <Image
                     src={dt.imgSrc}
                     alt={`관심학교 ${idx}`}

@@ -23,8 +23,9 @@ const SchoolFestivalListEditor: React.FC<Props> = ({
 }) => {
   return (
     <ul className='w-full flex flex-row gap-[7px] flex-wrap'>
-      {interestSchoolList.map((dt) => (
+      {interestSchoolList.map((dt, idx) => (
         <SchoolCardEditor
+          key={dt.festivalId + idx}
           imgSrc={dt.imgSrc}
           schoolName={dt.schoolName}
           festivalName={dt.festivalName}

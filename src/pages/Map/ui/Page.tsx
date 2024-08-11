@@ -149,6 +149,7 @@ const MapPage: React.FC<Props> = ({}) => {
                   <li
                     className='w-[80vw] rounded-xl bg-white flex flex-row gap-[15px] px-[16px] py-[15px] cursor-pointer'
                     onClick={() => router.push('/booth')}
+                    key={dt.name + idx}
                   >
                     <div className='relative'>
                       <Image

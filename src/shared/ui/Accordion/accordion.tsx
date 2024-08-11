@@ -52,6 +52,7 @@ const AccordionOuter = React.forwardRef<
     <div className={cn('pb-4 pt-0 w-full', className)}>{children}</div>
   </AccordionPrimitive.AccordionHeader>
 ));
+AccordionOuter.displayName = AccordionPrimitive.Trigger.displayName;
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
