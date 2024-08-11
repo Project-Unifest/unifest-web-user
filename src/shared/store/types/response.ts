@@ -16,3 +16,18 @@ export interface Festival {
   schoolName: string;
   thumbnail: string;
 }
+
+export interface TodayFestival {
+  schoolId: string;
+  schoolName: string;
+  thumbnail: string;
+  festivalId: string;
+  festivalName: string;
+  beginDate: string;
+  endDate: string;
+  starList: {
+    starId: string;
+    name: string;
+    imgUrl: string;
+  }[];
+}

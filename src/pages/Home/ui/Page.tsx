@@ -47,7 +47,7 @@ const HomePage: React.FC = () => {
           <AccordionTrigger></AccordionTrigger>
         </AccordionItem>
       </Accordion>
-      <TodayFestivalSchedule />
+      <TodayFestivalSchedule selectedDate={selectedDate} />
     </div>
   );
 };

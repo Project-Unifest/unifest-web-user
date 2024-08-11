@@ -4,8 +4,13 @@ import React from 'react';
 import ScheduleIcon from '@/shared/assets/icon/schedule_outline_icon.svg';
 import { Button } from '@/shared/ui/Button/button';
 import { useRouter } from 'next/navigation';
+import { axiosInstance } from '@/shared/store/instance';
+import { Response, TodayFestival } from '@/shared/store/types/response';
+import { useQuery } from '@tanstack/react-query';
 
-interface Props {}
+interface Props {
+  selectedDate: Date | undefined;
+}
 interface Schedule {
   dateText: string;
   festivalTitle: string;
@@ -38,12 +43,42 @@ const festivalArr: Schedule[] = [
   //   ],
   // },
 ];
-const TodayFestivalSchedule: React.FC<Props> = ({}) => {
+const dayArr = ['일', '월', '화', '수', '목', '금', '토'];
+const TodayFestivalSchedule: React.FC<Props> = ({ selectedDate }) => {
   const router = useRouter();
+  const dateStringFormat = (date: Date) => {
+    return `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1).toString() : date.getMonth() + 1}-${date.getDate() < 10 ? '0' + date.getDate().toString() : date.getDate()}`;
+  };
+  const monthAndDayStringFormat = (date: Date) => {
+    return `${date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1).toString() : date.getMonth() + 1}-${date.getDate() < 10 ? '0' + date.getDate().toString() : date.getDate()}(${dayArr[date.getDay()]})`;
+  };
+  const getTodayFestivals = async (dateStr: string) => {
+    const res = await axiosInstance.get(`/festival/today?date=${dateStr}`);
+    const data: Response<TodayFestival[]> = res.data;
+    return data;
+  };
+
+  const { data: todayFestivalsData } = useQuery({
+    queryKey: ['todayFestivals', selectedDate || 'today'],
+    queryFn: () =>
+      getTodayFestivals(dateStringFormat(selectedDate || new Date())),
+  });
+
+  console.log(todayFestivalsData);
+
+  const festivalArr: Schedule[] =
+    todayFestivalsData?.data.map((dt) => ({
+      dateText: monthAndDayStringFormat(selectedDate || new Date()),
+      festivalTitle: dt.festivalName,
+      location: dt.schoolName,
+      imgs: dt.starList.map((d) => d.imgUrl),
+    })) || [];
+
   return (
     <section className='w-full border-b-[8px] border-b-[#F1F3F7]'>
       <h1 className=' font-semibold text-[15px] px-[19px] pt-[18px] pb-[25px]'>
-        5월 1일 축제 일정
+        {(selectedDate?.getMonth() || new Date().getMonth()) + 1}월{' '}
+        {selectedDate?.getDate() || new Date().getDate()}일 축제 일정
       </h1>
       {festivalArr.length !== 0 ? (
         <ul className='pl-[19px] flex flex-col gap-[16px] pb-[30px]'>
