@@ -19,7 +19,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryClientProvider client={queryClient}>
           {children}
-          {pathName !== '/intro' && pathName !== '/booth' && <NavigationBar />}
+          {pathName !== '/intro' && !pathName?.includes('/booth/') && (
+            <NavigationBar />
+          )}
         </QueryClientProvider>
       </body>
       <Script

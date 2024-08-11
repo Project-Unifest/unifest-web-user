@@ -43,3 +43,12 @@ export interface Booth {
   longitude: number;
   enabled: boolean;
 }
+export interface BoothDetail extends Booth {
+  warning: string;
+  menus: {
+    id: string;
+    name: string;
+    price: number;
+    imgUrl: string;
+  }[];
+}

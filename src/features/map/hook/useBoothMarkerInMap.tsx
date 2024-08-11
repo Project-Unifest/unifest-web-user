@@ -45,7 +45,7 @@ export const useBoothMarkerInMap = (
             icon: imgSrc,
           });
           naver.maps.Event.addListener(newMarker, 'click', function (e) {
-            router.push('/booth');
+            router.push(`/booth/${dt.id}`);
           });
 
           return newMarker;

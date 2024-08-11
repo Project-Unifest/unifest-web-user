@@ -1,10 +1,11 @@
+'use client';
 import BoothPage from '@/pages/booth/ui/Page';
 import React from 'react';
 
-const BoothPageWrapper: React.FC = () => {
+const BoothPageWrapper = ({ params }: { params: { id: string } }) => {
   return (
     <>
-      <BoothPage />
+      <BoothPage id={params.id} />
     </>
   );
 };
