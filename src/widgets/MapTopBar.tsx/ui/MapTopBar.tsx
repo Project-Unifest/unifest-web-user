@@ -5,17 +5,30 @@ import {
   ToggleGroupItem,
 } from '@/shared/ui/ToggleGroup/toggle-group';
 import FestivalMapDrawer from '@/widgets/FestivalMapDrawer/ui/FestivalMapDrawer';
+import { interestFestival } from '@/shared/store/types/festival';
 
 interface Props {
   changeMapToLocation: (lat: number, lng: number) => void;
+  checkedInterestFestival: interestFestival | undefined;
+  setCheckedInterestFestival: React.Dispatch<
+    React.SetStateAction<interestFestival | undefined>
+  >;
 }
 
 const toggleArr = ['주점', '먹거리', '이벤트', '일반', '의무실', '화장실'];
 
-const MapTopBar: React.FC<Props> = ({ changeMapToLocation }: Props) => {
+const MapTopBar: React.FC<Props> = ({
+  changeMapToLocation,
+  checkedInterestFestival,
+  setCheckedInterestFestival,
+}: Props) => {
   return (
     <header className='flex flex-col gap-[10px] pl-[22px] pt-[25px] pb-[14px] items-start shadow-bottom rounded-b-[23px] w-full'>
-      <FestivalMapDrawer changeMapToLocation={changeMapToLocation} />
+      <FestivalMapDrawer
+        changeMapToLocation={changeMapToLocation}
+        checkedInterestFestival={checkedInterestFestival}
+        setCheckedInterestFestival={setCheckedInterestFestival}
+      />
       <SearchBar />
       <ToggleGroup type='multiple'>
         {toggleArr.map((dt) => (

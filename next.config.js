@@ -4,15 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'unifest-dev-bucket.s3.ap-northeast-2.amazonaws.com',
-        port: '',
-        pathname: '**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.namu.wiki',
-        port: '',
-        pathname: '/i/**',
+        hostname: '**',
       },
     ],
   },

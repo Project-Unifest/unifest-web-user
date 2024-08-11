@@ -31,3 +31,15 @@ export interface TodayFestival {
     imgUrl: string;
   }[];
 }
+
+export interface PopularBooth {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  thumbnail: string;
+  location: string;
+  latitude: number;
+  longitude: number;
+  enabled: boolean;
+}

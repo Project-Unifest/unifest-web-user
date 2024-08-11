@@ -20,9 +20,17 @@ import { useQuery } from '@tanstack/react-query';
 import CheckIcon from '@/shared/assets/icon/check.svg';
 interface Props {
   changeMapToLocation: (lat: number, lng: number) => void;
+  checkedInterestFestival: interestFestival | undefined;
+  setCheckedInterestFestival: React.Dispatch<
+    React.SetStateAction<interestFestival | undefined>
+  >;
 }
 
-const FestivalMapDrawer: React.FC<Props> = ({ changeMapToLocation }: Props) => {
+const FestivalMapDrawer: React.FC<Props> = ({
+  changeMapToLocation,
+  checkedInterestFestival,
+  setCheckedInterestFestival,
+}: Props) => {
   const [isSearchMode, setIsSearchMode] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
 
@@ -82,9 +90,6 @@ const FestivalMapDrawer: React.FC<Props> = ({ changeMapToLocation }: Props) => {
       lat: dt.latitude,
       lng: dt.longitude,
     })) || [];
-
-  const [checkedInterestFestival, setCheckedInterestFestival] =
-    useState<interestFestival>();
 
   return (
     <div>
