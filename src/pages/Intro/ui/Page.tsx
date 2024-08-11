@@ -4,6 +4,7 @@ import {
   interestFestivalArrData,
 } from '@/shared/store/types/festival';
 import { Button } from '@/shared/ui/Button/button';
+import ReactQueryProviders from '@/shared/utils/react-query-provider';
 import SchoolFestivalInterestList from '@/widgets/SchoolFestivalInterestList/ui/SchoolFestivalInterestList';
 import SchoolFestivalSelect from '@/widgets/SchoolFestivalSelect/ui/SchoolFestivalSelect';
 import SchoolFestivalTabs from '@/widgets/SchoolFestivalTabs/ui/SchoolFestivalTabs';
@@ -33,23 +34,25 @@ const IntroPage: React.FC = () => {
 
   return (
     <>
-      <SchoolFestivalSelect />
-      <SearchBar />
-      {interestSchoolList.length > 0 && (
-        <SchoolFestivalInterestList
+      <ReactQueryProviders>
+        <SchoolFestivalSelect />
+        <SearchBar />
+        {interestSchoolList.length > 0 && (
+          <SchoolFestivalInterestList
+            interestSchoolList={interestSchoolList}
+            clearInterestSchoolList={clearInterestSchoolList}
+          />
+        )}
+        <SchoolFestivalTabs
           interestSchoolList={interestSchoolList}
-          clearInterestSchoolList={clearInterestSchoolList}
+          setInterestSchoolList={setInterestSchoolList}
         />
-      )}
-      <SchoolFestivalTabs
-        interestSchoolList={interestSchoolList}
-        setInterestSchoolList={setInterestSchoolList}
-      />
-      <div className='fixed w-full px-[15px] bottom-[22px]'>
-        <Button size={'full_lg'} onClick={() => router.push('/home')}>
-          추가 완료
-        </Button>
-      </div>
+        <div className='fixed w-full px-[15px] bottom-[22px]'>
+          <Button size={'full_lg'} onClick={() => router.push('/home')}>
+            추가 완료
+          </Button>
+        </div>
+      </ReactQueryProviders>
     </>
   );
 };

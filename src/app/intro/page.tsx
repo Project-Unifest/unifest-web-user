@@ -1,3 +1,4 @@
+'use client';
 import IntroPage from '@/pages/Intro/ui/Page';
 import React from 'react';
 

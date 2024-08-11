@@ -64,8 +64,6 @@ const TodayFestivalSchedule: React.FC<Props> = ({ selectedDate }) => {
       getTodayFestivals(dateStringFormat(selectedDate || new Date())),
   });
 
-  console.log(todayFestivalsData);
-
   const festivalArr: Schedule[] =
     todayFestivalsData?.data.map((dt) => ({
       dateText: monthAndDayStringFormat(selectedDate || new Date()),

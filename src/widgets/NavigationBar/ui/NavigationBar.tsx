@@ -17,7 +17,7 @@ import ActivatedWaitingIcon from '@/shared/assets/icon/activated_waiting_icon.sv
 import MenuIcon from '@/shared/assets/icon/menu_icon.svg';
 import ActivatedMenuIcon from '@/shared/assets/icon/activated_menu_icon.svg';
 import OnlyAppDialog from '@/widgets/OnlyAppDialog/ui/OnlyAppDialog';
-import { Button } from '@/shared/ui/Button/button';
+import { Button, buttonVariants } from '@/shared/ui/Button/button';
 
 const menuData: {
   id: string;
@@ -68,14 +68,19 @@ const NavigationBar: React.FC = () => {
           >
             {dt.name === '웨이팅' ? (
               <OnlyAppDialog>
-                <Button size={'full_full'} variant={'ghost'}>
+                <div
+                  className={buttonVariants({
+                    size: 'full_full',
+                    variant: 'ghost',
+                  })}
+                >
                   <div className='flex flex-col items-center gap-1'>
                     <dt.icon />
                     <p className=' text-[11px] text-[#525252] font-normal'>
                       {dt.name}
                     </p>
                   </div>
-                </Button>
+                </div>
               </OnlyAppDialog>
             ) : (
               <PaginationLink

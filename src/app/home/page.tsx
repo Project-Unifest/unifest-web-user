@@ -1,3 +1,4 @@
+'use client';
 import HomePage from '@/pages/Home/ui/Page';
 import React from 'react';
 

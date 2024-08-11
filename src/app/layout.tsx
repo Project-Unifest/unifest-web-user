@@ -4,10 +4,10 @@ import './globals.css';
 import { usePathname } from 'next/navigation';
 import NavigationBar from '@/widgets/NavigationBar/ui/NavigationBar';
 import Script from 'next/script';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
+import ReactQueryProviders from '@/shared/utils/react-query-provider';
 
 const inter = Inter({ subsets: ['latin'] });
-const queryClient = new QueryClient();
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -15,23 +15,25 @@ export default function RootLayout({
 }>) {
   const pathName = usePathname();
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <QueryClientProvider client={queryClient}>
-          {children}
-          {pathName !== '/intro' && !pathName?.includes('/booth/') && (
-            <NavigationBar />
-          )}
-        </QueryClientProvider>
-      </body>
-      <Script
-        src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
-        strategy='beforeInteractive'
-      />
-      <Script
-        src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}&submodules=geocoder`}
-        strategy='beforeInteractive'
-      />
-    </html>
+    <>
+      <html lang='en'>
+        <body className={inter.className}>
+          <ReactQueryProviders>
+            {children}
+            {pathName !== '/intro' && !pathName?.includes('/booth/') && (
+              <NavigationBar />
+            )}
+          </ReactQueryProviders>
+        </body>
+        <Script
+          src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
+          strategy='beforeInteractive'
+        />
+        <Script
+          src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}&submodules=geocoder`}
+          strategy='beforeInteractive'
+        />
+      </html>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+'use client';
 import MenuPage from '@/pages/Menu/ui/Page';
 import React from 'react';
 

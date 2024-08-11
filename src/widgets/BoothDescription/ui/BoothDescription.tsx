@@ -11,9 +11,11 @@ import {
   TabsContent,
   TabsFullList,
 } from '@/shared/ui/Tabs/tabs';
-import { BoothDetail } from '@/shared/store/types/response';
+import { BoothDetail, Response } from '@/shared/store/types/response';
+import { axiosInstance } from '@/shared/store/instance';
+import { useQuery } from '@tanstack/react-query';
 interface Props {
-  boothDetailData: BoothDetail | undefined;
+  id: string;
 }
 
 const foodArr: { name: string; imageSrc: string; price: string }[] = [
@@ -21,7 +23,22 @@ const foodArr: { name: string; imageSrc: string; price: string }[] = [
 ];
 const imgArr: string[] = ['', ''];
 
-const BoothDescription: React.FC<Props> = ({ boothDetailData }: Props) => {
+const BoothDescription: React.FC<Props> = ({ id }: Props) => {
+  const getFestivalBoothDetail = async (festivalId: string) => {
+    const res = await axiosInstance.get(`/api/booths/${festivalId}`);
+    const response: Response<BoothDetail> = res.data;
+    return response;
+  };
+
+  const { data: boothDetailDataRes } = useQuery({
+    queryKey: ['getFestivalBoothDetail', id],
+    queryFn: () => getFestivalBoothDetail(id),
+    enabled: !!id,
+  });
+
+  const boothDetailData = boothDetailDataRes?.data;
+
+  console.log(boothDetailData);
   return (
     <section className='w-full border-b-[8px] border-b-[#F1F3F7]'>
       <img
