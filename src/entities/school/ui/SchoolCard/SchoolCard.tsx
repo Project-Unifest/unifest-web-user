@@ -5,15 +5,22 @@ interface Props {
   schoolName: string;
   festivalName: string;
   date: string;
+  festivalId: string;
+  schoolId: string;
+  onClick: () => void;
 }
 const SchoolCard: React.FC<Props> = ({
   imgSrc,
   schoolName,
   festivalName,
   date,
+  onClick,
 }) => {
   return (
-    <li className='flex cursor-pointer flex-col items-center gap-[2px] justify-center w-[113px] h-[121px] rounded-[10px] border-[1px] border-[#D9D9D9]'>
+    <li
+      onClick={onClick}
+      className='flex cursor-pointer flex-col items-center gap-[2px] justify-center w-[113px] h-[121px] rounded-[10px] border-[1px] border-[#D9D9D9]'
+    >
       <Image src={imgSrc} alt='schoolCard img' width={35} height={34} />
       <h1 className=' text-[#131316] font-medium mt-[6px] text-[13px]'>
         {schoolName}

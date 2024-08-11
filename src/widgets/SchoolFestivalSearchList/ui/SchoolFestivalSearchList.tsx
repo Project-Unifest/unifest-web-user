@@ -1,3 +1,4 @@
+import { interestFestival } from '@/shared/store/types/festival';
 import SchoolFestivalList from '@/widgets/SchoolFestivalList/ui/SchoolFestivalList';
 import React from 'react';
 interface Props {
@@ -6,9 +7,19 @@ interface Props {
     schoolName: string;
     festivalName: string;
     date: string;
+    festivalId: string;
+    schoolId: string;
   }[];
+  interestSchoolList: interestFestival[];
+  setInterestSchoolList: React.Dispatch<
+    React.SetStateAction<interestFestival[]>
+  >;
 }
-const SchoolFestivalSearchList: React.FC<Props> = ({ schoolArr }) => {
+const SchoolFestivalSearchList: React.FC<Props> = ({
+  schoolArr,
+  interestSchoolList,
+  setInterestSchoolList,
+}) => {
   return (
     <div className='h-[440px]'>
       <p className='font-[#4C4C4D] font-medium text-xs py-[14px]'>
@@ -21,7 +32,11 @@ const SchoolFestivalSearchList: React.FC<Props> = ({ schoolArr }) => {
           </p>
         </div>
       ) : (
-        <SchoolFestivalList schoolArr={schoolArr} />
+        <SchoolFestivalList
+          schoolArr={schoolArr}
+          interestSchoolList={interestSchoolList}
+          setInterestSchoolList={setInterestSchoolList}
+        />
       )}
     </div>
   );

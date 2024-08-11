@@ -1,4 +1,5 @@
 import { axiosInstance } from '@/shared/store/instance';
+import { interestFestival } from '@/shared/store/types/festival';
 import { Festival, Response } from '@/shared/store/types/response';
 import {
   Tabs,
@@ -21,22 +22,17 @@ const regionArr = [
   '경상',
 ];
 
-const interestSchoolList: {
-  imgSrc: string;
-  schoolName: string;
-  festivalName: string;
-  date: string;
-}[] = [
-  {
-    imgSrc:
-      'https://i.namu.wiki/i/E4gAwg65fMroWtXG5POYiwcGseYpmfhrm9fYxCzSqXThXDMEG9yZAjkkq8_bQEkrIjAQZrQSObatdE-eDp86xQ.svg',
-    schoolName: '건국대 서울캠',
-    festivalName: '녹색지대',
-    date: '05.06-05.08',
-  },
-];
+interface Props {
+  interestSchoolList: interestFestival[];
+  setInterestSchoolList: React.Dispatch<
+    React.SetStateAction<interestFestival[]>
+  >;
+}
 
-const SchoolFestivalTabs: React.FC = () => {
+const SchoolFestivalTabs: React.FC<Props> = ({
+  interestSchoolList,
+  setInterestSchoolList,
+}) => {
   const getAllFestival = async () => {
     const res = await axiosInstance.get('/festival/all');
     const response: Response<Festival[]> = res.data;
@@ -83,6 +79,8 @@ const SchoolFestivalTabs: React.FC = () => {
     schoolName: string;
     festivalName: string;
     date: string;
+    festivalId: string;
+    schoolId: string;
   }[] =
     (nowTab === '전체'
       ? allData?.data.map((dt) => ({
@@ -90,12 +88,16 @@ const SchoolFestivalTabs: React.FC = () => {
           schoolName: dt.schoolName,
           festivalName: dt.festivalName,
           date: dateToDateFormat(dt.beginDate, dt.endDate),
+          festivalId: dt.festivalId,
+          schoolId: dt.schoolId,
         }))
       : regionData?.data.map((dt) => ({
           imgSrc: dt.thumbnail,
           schoolName: dt.schoolName,
           festivalName: dt.festivalName,
           date: dateToDateFormat(dt.beginDate, dt.endDate),
+          festivalId: dt.festivalId,
+          schoolId: dt.schoolId,
         }))) || [];
 
   return (
@@ -110,7 +112,11 @@ const SchoolFestivalTabs: React.FC = () => {
         </TabsList>
         {regionArr.map((dt) => (
           <TabsContent value={dt} className='px-[19px]'>
-            <SchoolFestivalSearchList schoolArr={dataToShow} />
+            <SchoolFestivalSearchList
+              schoolArr={dataToShow}
+              interestSchoolList={interestSchoolList}
+              setInterestSchoolList={setInterestSchoolList}
+            />
           </TabsContent>
         ))}
       </Tabs>

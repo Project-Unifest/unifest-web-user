@@ -1,40 +1,50 @@
 'use client';
-import { axiosInstance } from '@/shared/store/instance';
-import { Festival, Response } from '@/shared/store/types/response';
+import {
+  interestFestival,
+  interestFestivalArrData,
+} from '@/shared/store/types/festival';
 import { Button } from '@/shared/ui/Button/button';
 import SchoolFestivalInterestList from '@/widgets/SchoolFestivalInterestList/ui/SchoolFestivalInterestList';
 import SchoolFestivalSelect from '@/widgets/SchoolFestivalSelect/ui/SchoolFestivalSelect';
 import SchoolFestivalTabs from '@/widgets/SchoolFestivalTabs/ui/SchoolFestivalTabs';
 import SearchBar from '@/widgets/SearchBar/ui/SearchBar';
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import React from 'react';
-const interestSchoolList: {
-  imgSrc: string;
-  schoolName: string;
-  festivalName: string;
-  date: string;
-}[] = [
-  {
-    imgSrc:
-      'https://i.namu.wiki/i/E4gAwg65fMroWtXG5POYiwcGseYpmfhrm9fYxCzSqXThXDMEG9yZAjkkq8_bQEkrIjAQZrQSObatdE-eDp86xQ.svg',
-    schoolName: '건국대 서울캠',
-    festivalName: '녹색지대',
-    date: '05.06-05.08',
-  },
-];
+import React, { useEffect, useState } from 'react';
 
 const IntroPage: React.FC = () => {
   const router = useRouter();
+  const [interestSchoolList, setInterestSchoolList] = useState<
+    interestFestival[]
+  >([]);
+  useEffect(() => {
+    const interestFestivalData = localStorage.getItem(
+      'unifest-interest-festival'
+    );
+    if (interestFestivalData) {
+      const data: interestFestivalArrData = JSON.parse(interestFestivalData);
+      setInterestSchoolList(data.data);
+    }
+  }, []);
+
+  const clearInterestSchoolList = () => {
+    setInterestSchoolList([]);
+    localStorage.removeItem('unifest-interest-festival');
+  };
 
   return (
     <>
       <SchoolFestivalSelect />
       <SearchBar />
       {interestSchoolList.length > 0 && (
-        <SchoolFestivalInterestList schoolArr={interestSchoolList} />
+        <SchoolFestivalInterestList
+          schoolArr={interestSchoolList}
+          clearInterestSchoolList={clearInterestSchoolList}
+        />
       )}
-      <SchoolFestivalTabs />
+      <SchoolFestivalTabs
+        interestSchoolList={interestSchoolList}
+        setInterestSchoolList={setInterestSchoolList}
+      />
       <div className='fixed w-full px-[15px] bottom-[22px]'>
         <Button size={'full_lg'} onClick={() => router.push('/home')}>
           추가 완료
