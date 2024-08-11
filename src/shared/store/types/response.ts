@@ -32,7 +32,7 @@ export interface TodayFestival {
   }[];
 }
 
-export interface PopularBooth {
+export interface Booth {
   id: string;
   name: string;
   category: string;

@@ -2,7 +2,7 @@
 import Map from '@/features/map/ui/Map/Map';
 import { Button } from '@/shared/ui/Button/button';
 import MapTopBar from '@/widgets/MapTopBar.tsx/ui/MapTopBar';
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import ChevronUpIcon from '@/shared/assets/icon/pink_chevron_up.svg';
 import XIcon from '@/shared/assets/icon/x.svg';
 import Image from 'next/image';
@@ -13,15 +13,12 @@ import { useMapWithGeocoder } from '@/features/map/hook/useMapWithGeocoder';
 import { useUserLocationMap } from '@/features/map/hook/useUserLocationMap';
 import { interestFestival } from '@/shared/store/types/festival';
 import { axiosInstance } from '@/shared/store/instance';
-import {
-  Festival,
-  PopularBooth,
-  Response,
-} from '@/shared/store/types/response';
+import { Booth, Response } from '@/shared/store/types/response';
 import { useQuery } from '@tanstack/react-query';
+import { useBoothMarkerInMap } from '@/features/map/hook/useBoothMarkerInMap';
 interface Props {}
 
-interface Booth {
+interface ShowBooth {
   imgSrc: string;
   name: string;
   description: string;
@@ -51,7 +48,12 @@ const MapPage: React.FC<Props> = ({}) => {
 
   const get5PopularFestivalBooth = async (festivalId: string) => {
     const res = await axiosInstance.get(`/api/booths?festivalId=${festivalId}`);
-    const response: Response<PopularBooth[]> = res.data;
+    const response: Response<Booth[]> = res.data;
+    return response;
+  };
+  const getAllFestivalBooth = async (festivalId: string) => {
+    const res = await axiosInstance.get(`/api/booths/${festivalId}/booths`);
+    const response: Response<Booth[]> = res.data;
     return response;
   };
 
@@ -62,7 +64,14 @@ const MapPage: React.FC<Props> = ({}) => {
     enabled: !!checkedInterestFestival,
   });
 
-  const boothArr: Booth[] =
+  const { data: allBoothData } = useQuery({
+    queryKey: ['getAllFestivalBooth', checkedInterestFestival],
+    queryFn: () =>
+      getAllFestivalBooth(checkedInterestFestival?.festivalId || '0'),
+    enabled: !!checkedInterestFestival,
+  });
+
+  const boothArr: ShowBooth[] =
     popular5BoothData?.data.map((dt) => ({
       imgSrc: dt.thumbnail,
       name: dt.name,
@@ -70,12 +79,35 @@ const MapPage: React.FC<Props> = ({}) => {
       location: dt.location,
     })) || [];
 
+  const [checkedToggleArr, setCheckedToggleArr] = useState<string[]>([
+    'BAR',
+    'FOOD',
+    'EVENT',
+    'NORMAL',
+    'MEDICAL',
+    'TOILET',
+  ]);
+
+  const allboothDataInMap: Booth[] = allBoothData?.data || [];
+  const filteredBoothDataInMap: Booth[] = useMemo(
+    () =>
+      allboothDataInMap.filter((dt) => checkedToggleArr.includes(dt.category)),
+    [allBoothData, checkedToggleArr]
+  );
+
+  const { boothLocMarkerArr } = useBoothMarkerInMap(
+    map,
+    filteredBoothDataInMap
+  );
+
   return (
     <div className='flex flex-col w-full relative'>
       <MapTopBar
         changeMapToLocation={changeMapToLocation}
         checkedInterestFestival={checkedInterestFestival}
         setCheckedInterestFestival={setCheckedInterestFestival}
+        checkedToggleArr={checkedToggleArr}
+        setCheckedToggleArr={setCheckedToggleArr}
       />
       <Map
         isPopularBooth={isPopularBooth}
@@ -115,7 +147,7 @@ const MapPage: React.FC<Props> = ({}) => {
               <ul className='absolute left-0 top-0 px-[44px] flex items-center gap-[12px] '>
                 {boothArr.map((dt, idx) => (
                   <li
-                    className='w-[80vw] rounded-xl bg-white flex flex-row gap-[15px] px-[16px] py-[15px]'
+                    className='w-[80vw] rounded-xl bg-white flex flex-row gap-[15px] px-[16px] py-[15px] cursor-pointer'
                     onClick={() => router.push('/booth')}
                   >
                     <div className='relative'>

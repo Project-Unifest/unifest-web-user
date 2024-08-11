@@ -13,14 +13,25 @@ interface Props {
   setCheckedInterestFestival: React.Dispatch<
     React.SetStateAction<interestFestival | undefined>
   >;
+  checkedToggleArr: string[];
+  setCheckedToggleArr: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const toggleArr = ['주점', '먹거리', '이벤트', '일반', '의무실', '화장실'];
+const toggleArr = [
+  { value: 'BAR', key: '주점' },
+  { value: 'FOOD', key: '먹거리' },
+  { value: 'EVENT', key: '이벤트' },
+  { value: 'NORMAL', key: '일반' },
+  { value: 'MEDICAL', key: '의무실' },
+  { value: 'TOILET', key: '화장실' },
+];
 
 const MapTopBar: React.FC<Props> = ({
   changeMapToLocation,
   checkedInterestFestival,
   setCheckedInterestFestival,
+  checkedToggleArr,
+  setCheckedToggleArr,
 }: Props) => {
   return (
     <header className='flex flex-col gap-[10px] pl-[22px] pt-[25px] pb-[14px] items-start shadow-bottom rounded-b-[23px] w-full'>
@@ -30,10 +41,14 @@ const MapTopBar: React.FC<Props> = ({
         setCheckedInterestFestival={setCheckedInterestFestival}
       />
       <SearchBar />
-      <ToggleGroup type='multiple'>
+      <ToggleGroup
+        type='multiple'
+        value={checkedToggleArr}
+        onValueChange={(e) => setCheckedToggleArr(e)}
+      >
         {toggleArr.map((dt) => (
-          <ToggleGroupItem key={dt} value={dt}>
-            {dt}
+          <ToggleGroupItem key={dt.key} value={dt.value}>
+            {dt.key}
           </ToggleGroupItem>
         ))}
       </ToggleGroup>
