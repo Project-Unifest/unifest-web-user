@@ -25,6 +25,7 @@ interface ShowBooth {
   name: string;
   description: string;
   location: string;
+  id: string;
 }
 
 const MapPage: React.FC<Props> = ({}) => {
@@ -79,6 +80,7 @@ const MapPage: React.FC<Props> = ({}) => {
       name: dt.name,
       description: dt.description,
       location: dt.location,
+      id: dt.id,
     })) || [];
 
   const [checkedToggleArr, setCheckedToggleArr] = useState<string[]>([
@@ -151,7 +153,7 @@ const MapPage: React.FC<Props> = ({}) => {
                   {boothArr.map((dt, idx) => (
                     <li
                       className='w-[80vw] rounded-xl bg-white flex flex-row gap-[15px] px-[16px] py-[15px] cursor-pointer'
-                      onClick={() => router.push('/booth')}
+                      onClick={() => router.push(`/booth/${dt.id}`)}
                       key={dt.name + idx}
                     >
                       <div className='relative'>
