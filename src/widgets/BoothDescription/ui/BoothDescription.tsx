@@ -14,13 +14,11 @@ import {
 import { BoothDetail, Response } from '@/shared/store/types/response';
 import { axiosInstance } from '@/shared/store/instance';
 import { useQuery } from '@tanstack/react-query';
+import BoothTime from '@/entities/booth/ui/BoothTime/BoothTime';
 interface Props {
   id: string;
 }
 
-const foodArr: { name: string; imageSrc: string; price: string }[] = [
-  { imageSrc: '', name: '모둠 사시미', price: '45,000원' },
-];
 const imgArr: string[] = ['', ''];
 
 const BoothDescription: React.FC<Props> = ({ id }: Props) => {
@@ -37,16 +35,16 @@ const BoothDescription: React.FC<Props> = ({ id }: Props) => {
   });
 
   const boothDetailData = boothDetailDataRes?.data;
-
   console.log(boothDetailData);
+
   return (
     <section className='w-full border-b-[8px] border-b-[#F1F3F7]'>
       <img
         src={boothDetailData?.thumbnail || ''}
-        className='w-full h-[260px]'
+        className='w-full h-auto'
         alt='booth image'
       />
-      <div className='w-full flex justify-center mt-[23px]'>
+      <div className='w-full flex justify-center '>
         <Tabs defaultValue={'주간부스'} className='w-full'>
           <TabsFullList>
             <TabsBlackTrigger value={'주간부스'}>{'주간부스'}</TabsBlackTrigger>
@@ -66,13 +64,8 @@ const BoothDescription: React.FC<Props> = ({ id }: Props) => {
                 <p className='text-[#3D3D3D] font-normal text-[13px] pt-[15px] pb-[21px]'>
                   {boothDetailData?.description || ''}
                 </p>
-                <div className='flex items-center gap-[3px] pb-[11px]'>
-                  <TimeIcon />
-                  <p className='font-medium text-[13px] text-[#393939]'>
-                    {boothDetailData?.enabled ? '운영중' : '쉬는중'}
-                  </p>
-                  <ChevronDownIcon />
-                </div>
+                <BoothTime isOn={boothDetailData?.enabled || false} />
+
                 <div className='flex items-center gap-[3px] pb-[16px]'>
                   <LocationIcon />
                   <p className='font-medium text-[13px] text-[#393939]'>
