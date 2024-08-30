@@ -35,8 +35,11 @@ const BoothTime: React.FC<Props> = ({ isOn }: Props) => {
       </div>
       {isShowTime && (
         <div className='flex flex-col gap-[7px] pl-[18px]'>
-          {timeArr.map((dt) => (
-            <div className='flex flex-row items-center gap-[6px] font-medium text-[13px] text-[#45464A]'>
+          {timeArr.map((dt, idx) => (
+            <div
+              key={dt.startTime + dt.endTime + idx}
+              className='flex flex-row items-center gap-[6px] font-medium text-[13px] text-[#45464A]'
+            >
               <p>{dt.date}</p>
               <p>{dt.day}</p>
               <p>
