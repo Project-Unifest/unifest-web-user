@@ -79,21 +79,59 @@ function Calendar({
       )
     : [];
 
+  const nowDate = new Date();
+
   const daysWithOneFestival = [
     new Date(2024, 7, 10),
     new Date(2024, 7, 11),
     new Date(2024, 7, 12),
-  ];
+  ].filter(
+    (dt) =>
+      !(
+        dt.getFullYear() === selectedDate?.getFullYear() &&
+        dt.getMonth() === selectedDate?.getMonth() &&
+        dt.getDate() == selectedDate?.getDate()
+      ) &&
+      !(
+        dt.getFullYear() === nowDate?.getFullYear() &&
+        dt.getMonth() === nowDate?.getMonth() &&
+        dt.getDate() == nowDate?.getDate()
+      )
+  );
   const daysWithTwoFestival = [
     new Date(2024, 7, 13),
     new Date(2024, 7, 14),
     new Date(2024, 7, 15),
-  ];
+  ].filter(
+    (dt) =>
+      !(
+        dt.getFullYear() === selectedDate?.getFullYear() &&
+        dt.getMonth() === selectedDate?.getMonth() &&
+        dt.getDate() == selectedDate?.getDate()
+      ) &&
+      !(
+        dt.getFullYear() === nowDate?.getFullYear() &&
+        dt.getMonth() === nowDate?.getMonth() &&
+        dt.getDate() == nowDate?.getDate()
+      )
+  );
   const daysWithThreeFestival = [
     new Date(2024, 7, 16),
     new Date(2024, 7, 17),
     new Date(2024, 7, 18),
-  ];
+  ].filter(
+    (dt) =>
+      !(
+        dt.getFullYear() === selectedDate?.getFullYear() &&
+        dt.getMonth() === selectedDate?.getMonth() &&
+        dt.getDate() == selectedDate?.getDate()
+      ) &&
+      !(
+        dt.getFullYear() === nowDate?.getFullYear() &&
+        dt.getMonth() === nowDate?.getMonth() &&
+        dt.getDate() == nowDate?.getDate()
+      )
+  );
 
   const modifiers: DayPickerProps['modifiers'] = {};
   if (selectedDate) {
