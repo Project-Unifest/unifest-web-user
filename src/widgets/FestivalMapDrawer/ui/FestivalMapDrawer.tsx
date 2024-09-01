@@ -24,16 +24,21 @@ interface Props {
   setCheckedInterestFestival: React.Dispatch<
     React.SetStateAction<interestFestival | undefined>
   >;
+  isSearchMode: boolean;
+  setIsSearchMode: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FestivalMapDrawer: React.FC<Props> = ({
   changeMapToLocation,
   checkedInterestFestival,
   setCheckedInterestFestival,
+  isOpen,
+  isSearchMode,
+  setIsOpen,
+  setIsSearchMode,
 }: Props) => {
-  const [isSearchMode, setIsSearchMode] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
-
   const [interestSchoolList, setInterestSchoolList] = useState<
     interestFestival[]
   >([]);

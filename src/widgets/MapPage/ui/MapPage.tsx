@@ -36,12 +36,13 @@ const MapPage: React.FC<Props> = ({}) => {
   const mapWrapperRef = useRef<HTMLDivElement>(null);
   const { userLocation } = useLocation();
 
-  const { map } = useMapWithGeocoder(
+  const { map, hideMap, showMap } = useMapWithGeocoder(
     undefined,
     false,
     undefined,
     false,
-    mapContainerRef
+    mapContainerRef,
+    mapWrapperRef
   );
   const { changeMapToCenter, plusZoom, minusZoom, changeMapToLocation } =
     useUserLocationMap(map, userLocation, true);
@@ -113,6 +114,8 @@ const MapPage: React.FC<Props> = ({}) => {
           setCheckedInterestFestival={setCheckedInterestFestival}
           checkedToggleArr={checkedToggleArr}
           setCheckedToggleArr={setCheckedToggleArr}
+          hideMap={hideMap}
+          showMap={showMap}
         />
         <Map
           isPopularBooth={isPopularBooth}

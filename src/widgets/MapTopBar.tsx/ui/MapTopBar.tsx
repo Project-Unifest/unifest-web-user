@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchBar from '@/widgets/SearchBar/ui/SearchBar';
 import {
   ToggleGroup,
@@ -15,6 +15,8 @@ interface Props {
   >;
   checkedToggleArr: string[];
   setCheckedToggleArr: React.Dispatch<React.SetStateAction<string[]>>;
+  hideMap: () => void;
+  showMap: () => void;
 }
 
 const toggleArr = [
@@ -32,15 +34,38 @@ const MapTopBar: React.FC<Props> = ({
   setCheckedInterestFestival,
   checkedToggleArr,
   setCheckedToggleArr,
+  hideMap,
+  showMap,
 }: Props) => {
+  const [isSearchMode, setIsSearchMode] = useState(false);
+  const [isOpenDrawer, setIsOpenDrawer] = useState(true);
+  useEffect(() => {
+    if (isOpenDrawer) {
+      hideMap();
+    } else {
+      showMap();
+    }
+  }, [isOpenDrawer]);
   return (
     <header className='flex flex-col gap-[10px] pl-[22px] pt-[25px] pb-[14px] items-start shadow-bottom rounded-b-[23px] w-full'>
       <FestivalMapDrawer
         changeMapToLocation={changeMapToLocation}
         checkedInterestFestival={checkedInterestFestival}
         setCheckedInterestFestival={setCheckedInterestFestival}
+        setIsOpen={setIsOpenDrawer}
+        isOpen={isOpenDrawer}
+        isSearchMode={isSearchMode}
+        setIsSearchMode={setIsSearchMode}
       />
-      <SearchBar />
+      <div
+        className='w-full'
+        onClick={() => {
+          setIsSearchMode(true);
+          setIsOpenDrawer(true);
+        }}
+      >
+        <SearchBar />
+      </div>
       <ToggleGroup
         type='multiple'
         value={checkedToggleArr}

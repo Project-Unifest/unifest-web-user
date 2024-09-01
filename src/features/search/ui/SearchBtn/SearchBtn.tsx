@@ -6,7 +6,12 @@ interface Props {
 }
 const SearchBtn: React.FC<Props> = ({ onClick }) => {
   return (
-    <Button variant='ghost' size='icon' onClick={onClick}>
+    <Button
+      variant='ghost'
+      size='icon'
+      onClick={onClick}
+      className='hover:bg-transparent'
+    >
       <SearchIcon />
     </Button>
   );

@@ -5,9 +5,31 @@ export const useMapWithGeocoder = (
   scriptLoading: boolean,
   geocoderScriptError: ErrorEvent | undefined,
   geoCoderScriptLoading: boolean,
-  mapContainerRef: React.RefObject<HTMLDivElement>
+  mapContainerRef: React.RefObject<HTMLDivElement>,
+  mapWrapperRef: React.RefObject<HTMLDivElement>
 ) => {
   const [map, setMap] = useState<naver.maps.Map | undefined>();
+
+  const hideMap = () => {
+    if (map) {
+      map.setSize(
+        new naver.maps.Size(
+          mapWrapperRef.current?.getBoundingClientRect().width || 0,
+          0
+        )
+      );
+    }
+  };
+  const showMap = () => {
+    if (map) {
+      map.setSize(
+        new naver.maps.Size(
+          mapWrapperRef.current?.getBoundingClientRect().width || 0,
+          mapWrapperRef.current?.getBoundingClientRect().height || 0
+        )
+      );
+    }
+  };
 
   useEffect(() => {
     if (
@@ -25,6 +47,10 @@ export const useMapWithGeocoder = (
         new naver.maps.Map(mapContainerRef.current, {
           center: defaultCenter,
           zoom: 16,
+          size: new naver.maps.Size(
+            mapWrapperRef.current?.getBoundingClientRect().width || 0,
+            0
+          ),
         })
       );
     } else {
@@ -38,5 +64,5 @@ export const useMapWithGeocoder = (
     geocoderScriptError,
   ]);
 
-  return { map };
+  return { map, hideMap, showMap };
 };
