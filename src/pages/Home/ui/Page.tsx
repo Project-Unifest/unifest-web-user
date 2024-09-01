@@ -13,7 +13,9 @@ import TodayFestivalSchedule from '@/widgets/TodayFesitivalSchedule/ui/TodayFest
 import React, { useState } from 'react';
 
 const HomePage: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+    new Date()
+  );
   return (
     <ReactQueryProviders>
       <div>

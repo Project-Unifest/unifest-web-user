@@ -151,13 +151,13 @@ function Calendar({
         head_cell:
           'text-muted-foreground rounded-md flex-1 font-normal text-[0.8rem]',
         row: 'flex w-full mt-0 h-auto',
-        cell: 'h-auto flex-1 text-center flex items-center justify-center hover:bg-accent text-sm p-0 relative [&:has([aria-selected])]:hover:cursor-pointer ',
+        cell: 'h-auto flex-1 text-center flex items-center justify-center text-sm p-0 relative [&:has([aria-selected])]:hover:cursor-pointer ',
         day: 'h-[48px] w-full p-0 font-normal aria-selected:opacity-100',
         day_range_end: 'day-range-end',
-        day_selected:
-          'text-white before:z-[-1] before:w-[20px] before:h-[20px] before:absolute before:left-[calc(50%-10px)] before:top-[calc(50%-10px)] before:rounded-[100%] before:bg-[#FF748A] flex items-center justify-center text-center',
         day_today:
           'text-[#FF748A] before:w-[20px] before:h-[20px] before:rounded-[100%] before:absolute before:left-[calc(50%-10px)] before:top-[calc(50%-10px)] before:bg-transparent flex items-center justify-center text-center before:border before:border-[#FF748A]',
+        day_selected:
+          'text-white after:z-[-1] after:w-[20px] after:h-[20px] after:absolute after:left-[calc(50%-10px)] after:top-[calc(50%-10px)] after:rounded-[100%] after:bg-[#FF748A] flex items-center justify-center text-center',
         day_outside:
           'day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30',
         day_disabled: 'hidden',
