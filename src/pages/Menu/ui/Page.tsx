@@ -1,11 +1,15 @@
 'use client';
 import OnlyAppDialog from '@/widgets/OnlyAppDialog/ui/OnlyAppDialog';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SettingIcon from '@/shared/assets/icon/setting_icon.svg';
 import CallIcon from '@/shared/assets/icon/call_icon.svg';
 import EtcIcon from '@/shared/assets/icon/etc_icon.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import {
+  interestFestival,
+  interestFestivalArrData,
+} from '@/shared/store/types/festival';
 interface Props {}
 
 const schoolArr: {
@@ -15,6 +19,18 @@ const schoolArr: {
 }[] = [{ imgSrc: '', schoolName: '건국대', festivalName: '녹색지대' }];
 const MenuPage: React.FC<Props> = ({}) => {
   const router = useRouter();
+  const [interestSchoolList, setInterestSchoolList] = useState<
+    interestFestival[]
+  >([]);
+  useEffect(() => {
+    const interestFestivalData = localStorage.getItem(
+      'unifest-interest-festival'
+    );
+    if (interestFestivalData) {
+      const data: interestFestivalArrData = JSON.parse(interestFestivalData);
+      setInterestSchoolList(data.data);
+    }
+  }, []);
   return (
     <>
       <header className='fixed top-0 left-0 w-full px-[19px] py-[18px] rounded-b-2xl shadow-bottom bg-white'>
@@ -33,9 +49,9 @@ const MenuPage: React.FC<Props> = ({}) => {
               추가하기{'>'}
             </button>
           </div>
-          {schoolArr.length > 0 ? (
+          {interestSchoolList.length > 0 ? (
             <ul className='w-full flex flex-row flex-wrap gap-[34px] items-center pt-[25px]'>
-              {schoolArr.map((dt, idx) => (
+              {interestSchoolList.map((dt, idx) => (
                 <li
                   className='flex flex-col gap-[15px]'
                   key={dt.schoolName + idx}
@@ -43,13 +59,15 @@ const MenuPage: React.FC<Props> = ({}) => {
                   <Image
                     src={dt.imgSrc}
                     alt={`관심학교 ${idx}`}
+                    width={63}
+                    height={63}
                     className='w-[63px] h-[60px] rounded-full'
                   />
                   <div>
-                    <h1 className='font-medium text-[12px] text-[#727276]'>
+                    <h1 className='font-medium text-[12px] text-center text-[#727276]'>
                       {dt.schoolName}
                     </h1>
-                    <h2 className='font-semibold text-[14px] text-[#131316]'>
+                    <h2 className='font-semibold text-[14px] text-center text-[#131316]'>
                       {dt.festivalName}
                     </h2>
                   </div>
