@@ -1,25 +1,15 @@
 import Image from 'next/image';
 import React from 'react';
 import LocationIcon from '@/shared/assets/icon/green_map_icon.svg';
-import TimeIcon from '@/shared/assets/icon/time_icon.svg';
-import ChevronDownIcon from '@/shared/assets/icon/chevron_down.svg';
 
 import { Button } from '@/shared/ui/Button/button';
-import {
-  Tabs,
-  TabsBlackTrigger,
-  TabsContent,
-  TabsFullList,
-} from '@/shared/ui/Tabs/tabs';
+
 import { BoothDetail, Response } from '@/shared/store/types/response';
 import { axiosInstance } from '@/shared/store/instance';
 import { useQuery } from '@tanstack/react-query';
-import BoothTime from '@/entities/booth/ui/BoothTime/BoothTime';
 interface Props {
   id: string;
 }
-
-const imgArr: string[] = ['', ''];
 
 const BoothDescription: React.FC<Props> = ({ id }: Props) => {
   const getFestivalBoothDetail = async (festivalId: string) => {
@@ -58,7 +48,6 @@ const BoothDescription: React.FC<Props> = ({ id }: Props) => {
             <p className='text-[#3D3D3D] font-normal text-[13px] pt-[15px] pb-[21px]'>
               {boothDetailData?.description || ''}
             </p>
-            {/* <BoothTime isOn={boothDetailData?.enabled || false} /> */}
 
             <div className='flex items-center gap-[3px] pb-[16px]'>
               <LocationIcon />
