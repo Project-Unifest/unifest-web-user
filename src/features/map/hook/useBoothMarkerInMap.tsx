@@ -15,6 +15,11 @@ export const useBoothMarkerInMap = (
 
   useEffect(() => {
     if (map && filteredBoothDataInMap.length > 0) {
+      if (boothLocMarkerArr.length > 0) {
+        boothLocMarkerArr.forEach((val) => {
+          val.setMap(null);
+        });
+      }
       setBoothLocMarkerArr(
         filteredBoothDataInMap.map((dt) => {
           let imgSrc: string = '';
