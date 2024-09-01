@@ -21,14 +21,14 @@ const HomePage: React.FC = () => {
       <div>
         <Accordion type='single' collapsible defaultValue='item-1'>
           <AccordionItem value='item-1'>
-            <AccordionOuter className='px-[19px] py-[27px]'>
+            <AccordionOuter className='px-[19px] pt-[27px]'>
               <Calendar
                 showOnlyWeek={true}
                 selectedDate={selectedDate}
                 setSelectedDate={setSelectedDate}
               />
             </AccordionOuter>
-            <AccordionContent className='px-[19px] py-[27px]'>
+            <AccordionContent className='px-[19px] pt-[27px]'>
               <div className='w-full relative'>
                 <div className='w-full flex flex-row items-center gap-[16px] absolute top-[40px] left-[10px]'>
                   <div className='before:w-[7px] before:h-[7px] before:rounded-full before:bg-[#1FC0BA] flex items-center gap-[6px] text-medium text-[12px] text-[#727276]'>

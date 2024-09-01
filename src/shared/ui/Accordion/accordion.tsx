@@ -49,7 +49,7 @@ const AccordionOuter = React.forwardRef<
     className='overflow-hidden text-sm data-[state=closed]:flex data-[state=open]:hidden w-full justify-center'
     {...props}
   >
-    <div className={cn('pb-4 pt-0 w-full', className)}>{children}</div>
+    <div className={cn(' pt-0 w-full', className)}>{children}</div>
   </AccordionPrimitive.AccordionHeader>
 ));
 AccordionOuter.displayName = AccordionPrimitive.Trigger.displayName;
@@ -63,7 +63,7 @@ const AccordionContent = React.forwardRef<
     className='overflow-hidden text-sm transition-all flex data-[state=closed]:hidden data-[state=open]:animate-accordion-down w-full justify-center'
     {...props}
   >
-    <div className={cn('pb-4 pt-0 w-full', className)}>{children}</div>
+    <div className={cn('pt-0 w-full', className)}>{children}</div>
   </AccordionPrimitive.Content>
 ));
 
